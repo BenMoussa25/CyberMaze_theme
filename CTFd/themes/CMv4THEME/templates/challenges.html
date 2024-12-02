@@ -1,0 +1,237 @@
+<style type="text/css">
+  body{
+    background-image: url(/files/54e3d5312b30d5332bcd0c866dad425b/ezgif-7-a7507f0a10.gif) !important ;
+  }
+  h1{
+    font-size: 42pt !important;
+    font-family: "malkan", sans-serif !important;
+            background: linear-gradient(#f00,#400 ) !important;
+    -webkit-background-clip: text !important;
+            background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+   @font-face {
+  font-family: 'jah'; /* Name your font family */
+  src: url('/themes/CMv4THEME/static/webfonts/jah.ttf'); /* Locate the .ttf file within your directory*/
+  }
+  @font-face {
+  font-family: 'sabbath'; /* Name your font family */
+  src: url('/themes/CMv4THEME/static/webfonts/sabbath.ttf'); /* Locate the .ttf file within your directory*/
+  }
+  @font-face {
+  font-family: 'iron'; /* Name your font family */
+  src: url('/themes/CMv4THEME/static/webfonts/purgatory.ttf'); /* Locate the .ttf file within your directory*/
+  }
+    @font-face {
+  font-family: 'metal'; /* Name your font family */
+  src: url('/themes/CMv4THEME/static/webfonts/metal.ttf'); /* Locate the .ttf file within your directory*/
+  }
+    @font-face {
+  font-family: 'queen'; /* Name your font family */
+  src: url('/themes/CMv4THEME/static/webfonts/queen.ttf'); /* Locate the .ttf file within your directory*/
+  }
+  @font-face{
+    font-family: 'acdc'; /* Name your font family */
+  src: url('/themes/CMv4THEME/static/webfonts/acdc.ttf'); /* Locate the .ttf file within your directory*/
+
+  }
+    @font-face{
+    font-family: 'opeth'; /* Name your font family */
+    src: url('/themes/CMv4THEME/static/webfonts/Ruritania.ttf'); /* Locate the .ttf file within your directory*/
+
+  }
+  @font-face{
+    font-family: 'nirvana'; /* Name your font family */
+    src: url('/themes/CMv4THEME/static/webfonts/nirvana.ttf'); /* Locate the .ttf file within your directory*/
+
+  }
+  .iron{
+    color: red !important;
+    -webkit-text-stroke: 1px white;
+    font-family: 'iron' !important;
+    font-size:36pt;
+  }
+  .acdc{
+    color: red !important;
+    -webkit-text-stroke: 1.4px black;
+    font-family: acdc !important;
+    font-size:36pt;
+  }
+  .opeth{
+    font-family: opeth !important;
+    font-size:36pt;
+  }
+
+  .rhcp{
+    font-family: Arial !important;
+    font-size:32pt;
+    font-weight: bolder;
+  }
+  
+  .nirv
+{
+    font-family: nirvana !important;
+    color:#ffeb01 !important;
+    font-size:36pt;
+}
+.sabat
+{
+    font-family: sabbath !important;
+    color:#6f2591 !important;
+    font-size:36pt;
+}
+.queen{
+    font-family: queen !important;
+    font-size:40pt;
+}
+.metal{
+    font-family: metal !important;
+    font-size:40pt;
+}
+.metal::after{
+  content: "A";
+  display: inline-block !important;
+  -webkit-transform: scaleX(-1);
+}
+
+/*Chall Button CSS*/
+
+.challenge-button{
+    padding-bottom: 1% !important;
+    background: url('/files/523afa9d55aee5979cca65f99efed2d0/200w.gif') !important;
+    background-color: transparent !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 75% !important;
+    color:#aa0000 !important;
+    font-weight: 500 !important;
+    overflow: visible !important;
+    font-family: jah !important;
+    font-size: 18pt !important;
+  }
+  .challenge-solved{
+    padding-bottom: 1% !important;
+    background: url('/files/6c80826fbe89557df52f4661470872c5/ezgif-6-8af9874d8b.gif') !important;
+    background-color: transparent !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 75% !important;
+    color:#770000 !important;
+    font-weight: 500 !important;
+    overflow: visible !important;
+    font-family: jah !important;
+    font-size: 18pt !important;
+
+
+  }
+
+  body{
+  background-image: url('/files/54e3d5312b30d5332bcd0c866dad425b/ezgif-7-a7507f0a10.gif') !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;    
+  background-size: 100%;
+  background-attachment: fixed;
+}
+.ccame::after{
+  content: "/";
+font-family: acdc !important;
+}
+.ccame::before{
+  content: "/";
+  font-family: acdc !important;
+  display: inline-block !important;
+  -webkit-transform: scaleX(-1);
+}
+#cval{
+font-weight: 400;
+font-family: acdc !important; 
+padding-top:30px ;
+
+}
+
+
+
+</style>
+
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron" style="background: rgba(0, 0, 0, 0) !important;">
+    <div class="container">
+      <h1 style="line-height: 2;">
+        {% trans %}Challenges{% endtrans %}
+      </h1>
+    </div>
+  </div>
+
+  <div id='challengesboard' class="container">
+    <div class="row">
+      <div class="col-md-12">
+        
+        {% include "components/errors.html" %}
+      </div>
+    </div>
+
+    <div 
+      x-data="ChallengeBoard" 
+      @load-challenges.window="loadChallenges()" 
+      @load-challenge.window="loadChallenge($event.detail)"
+    >
+      <div
+          x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
+          x-html="$store.challenge.data.view"
+      ></div>
+
+      <div x-show="!loaded">
+        <div class="min-vh-50 d-flex align-items-center">
+          <div class="text-center w-100">
+            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+          </div>
+        </div>
+      </div>
+
+      <div x-show="loaded">
+        <template x-for="(category, idx) in getCategories()" :key="idx">
+          <div class="pt-5">
+            <div class="category-header mb-3">
+              <h3 x-text="category" :class="category === 'IRON MAIDEN' ? 'iron' 
+                                            : category === 'AC/DC' ? 'acdc' 
+                                            : category === 'Opeth' ? 'opeth' 
+                                            : category === 'NIRVANA' ? 'nirv' 
+                                            : category === 'Queen' ? 'queen' 
+                                            : category === 'Metallic' ? 'metal' 
+                                            : category === 'BLACK SABBATH' ? 'sabat' 
+                                            : category === 'RED HOT CHILI PEPPERS' ? 'rhcp' 
+                                            : 'NOT INCLUDED'"></h3>
+            </div>
+
+            <div class="category-challenges d-flex flex-column">
+              <div class="challenges-row row">
+                <template x-for="(c, idx) in getChallenges(category)" :key="c.id">
+                  <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+                    <button 
+
+                        class="challenge-button btn btn-dark w-100 h-100"
+                        :class="c.solved_by_me ? 'challenge-solved' : ''"
+                        :value="c.id" @click="loadChallenge(c.id)">
+
+                      <div class="challenge-inner my-3" >
+                        <p x-text="c.name" class="ccame"></p> 
+                        <p x-text="c.value" id="cval" ></p> 
+</div>
+                    </button>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{ Assets.js("assets/js/challenges.js") }}
+{% endblock %}

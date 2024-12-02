@@ -1,0 +1,51 @@
+<style type="text/css">
+	 h1{
+    font-size: 42pt !important;
+    font-family: "malkan", sans-serif !important;
+            background: linear-gradient(red, black) !important;
+    -webkit-background-clip: text !important;
+            background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  body{
+  background-image: url('/themes/admin/static/img/Cyber.png') !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;    
+  background-size: 100%;
+  background-attachment: fixed;
+}
+</style>
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="jumbotron" style="background-color: #21252900;">
+		<div class="container">
+			<h1>
+				{% trans %}Notifications{% endtrans %}
+			</h1>
+		</div>
+	</div>
+	<div class="container">
+		{% if not notifications %}
+		<h2 class="text-center">
+			{% trans %}There are no notifications yet{% endtrans %}
+		</h2>
+		{% endif %}
+		{% for notification in notifications %}
+		<div class="card bg-body-tertiary mb-4">
+			<div class="card-body">
+				<h3 class="card-title">{{ notification.title }}</h3>
+				<blockquote class="blockquote mb-0">
+					<p>{{ notification.html }}</p>
+					<small class="text-muted"><span data-time="{{ notification.date | isoformat }}"></span></small>
+				</blockquote>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ Assets.js("assets/js/notifications.js") }}
+{% endblock %}
+
